@@ -5,9 +5,9 @@ const connection = mysql.createConnection({
     port: 3306,
     user: "root",
     password: "RufusDog2019!",
-    database: "burger_db"
+    database: "burgers_db"
 });
-// Initialise the connection to buergers_db
+// Initialise the connection to burgers_db
 connection.connect(function (err) {
     if (err) {
         console.error("error connecting: " + err.stack);
