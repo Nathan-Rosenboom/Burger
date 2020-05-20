@@ -1,15 +1,14 @@
-<h1>Burgers</h1>
+<h1 class="title">Eat-Da-Burger!</h1>
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
+        <div class="readyBurger col-md-6">
             <h2>Ready burgers:</h2>
-            <ul>
+            <ul class="readyList">
                 {{#each burgers}}
                 {{#unless devoured}}
-                <li>
+                <li class="readyListItem">
                     {{burger_name}}
-
-                    <button class="devourBurger" data-id="{{id}}" data-newDevour="{{devour}}">
+                    <button class="devourBurger btn btn-secondary" data-id="{{id}}" data-newDevour="{{devour}}">
                         {{#if devour}}Devour!{{else}}Devour!{{/if}}
                     </button>
                 </li>
@@ -17,12 +16,12 @@
                 {{/each}}
             </ul>
         </div>
-        <div class="col-md-6">
+        <div class="devouredBurger col-md-6">
             <h2>Devoured burgers:</h2>
-            <ul>
+            <ul class="devouredList">
                 {{#each burgers}}
                 {{#if devoured}}
-                <li>
+                <li class="devouredListItem">
                     {{burger_name}}
                 </li>
                 {{/if}}
@@ -34,7 +33,7 @@
         <div class="col-md-2">
 
         </div>
-        <div class="col-md-8">
+        <div class="createBurger col-md-8">
             <h2>Create a burger!</h2>
 
             <form class="create-form">
@@ -42,7 +41,7 @@
                     <label for="burger">Burger:</label>
                     <textarea id="id" name="burger" rows="1" cols="50"></textarea>
                 </div>
-                <button type="submit">Add burger</button>
+                <button class="btn btn-secondary" type="submit">Add burger</button>
             </form>
         </div>
         <div class="col-md-2">
