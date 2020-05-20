@@ -1,8 +1,13 @@
 body {
-    background-color: orange;
+    background-color: rgb(245, 201, 106);
 }
 .title {
     text-align: center;
+}
+
+.burgerImg {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .readyBurger {
@@ -46,4 +51,8 @@ body {
 
 .devourBurger {
     float: right;
+}
+
+#burger {
+    width: 300px;
 }
