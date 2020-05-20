@@ -1,28 +1,65 @@
-const connection = require("./connection");
+const connection = require("../config/connection.js");
+
+function printQuestionMarks(num) {
+    let arr = [];
+    for (let i = 0; i < num; i++) {
+        arr.push("?");
+    }
+    return arr.toString();
+}
+function objToSql(ob) {
+    let arr = [];
+    for (let key in ob) {
+        let value = ob[key];
+        if (Object.hasOwnProperty.call(ob, key)) {
+            if (typeof value === "string" && value.indexOf(" ") >= 0) {
+                value = "'" + value + "'";
+            }
+            arr.push(key + "=" + value);
+        }
+    }
+    return arr.toString();
+}
 
 let orm = {
-    // Select all from a specific table
-    selectAll: function (tableInput) {
-        var queryString = `SELECT * FROM ??`;
-        connection.query(queryString, [tableInput], function (err, result) {
-            if (err) throw err;
-            console.log(result);
+    all: function (tableInput, cb) {
+        var queryString = "SELECT * FROM " + tableInput + ";";
+        connection.query(queryString, function (err, result) {
+            if (err) {
+                throw err;
+            }
+            cb(result);
         });
     },
-    // Insert a new row into a specific table
-    insertOne: function (tableInput, insertColumnOne, insertColumnTwo, insertName, insertStatus) {
-        var queryString = `INSERT INTO ??  (??, ??) VALUES (?, ?)`;
-        connection.query(queryString, [tableInput, insertColumnOne, insertColumnTwo, insertName, insertStatus], function (err, result) {
-            if (err) throw err;
-            console.log(result);
+    create: function (table, colOne, valOne, cb) {
+        let queryString = "INSERT INTO " + table + " (" + colOne + ") VALUES (" + valOne + ");";
+
+        console.log(queryString);
+
+        connection.query(queryString, function(err, result) {
+            if (err) {
+                throw err;
+            }
+
+            cb(result);
         });
     },
-    // Update a single value of an item in a specific table
-    updateOne: function (tableInput, setColumnOne, setValue, columnOne, valueOne) {
-        var queryString = `UPDATE ?? SET ?? = ? WHERE ?? = ?`;
-        connection.query(queryString, [tableInput, setColumnOne, setValue, columnOne, valueOne], function (err, result) {
-            if (err) throw err;
-            console.log(result);
+
+    update: function (table, objColVals, condition, cb) {
+        let queryString = "UPDATE " + table;
+
+        queryString += " SET ";
+        queryString += objToSql(objColVals);
+        queryString += " WHERE ";
+        queryString += condition;
+
+        console.log(queryString);
+        connection.query(queryString, function (err, result) {
+            if (err) {
+                throw err;
+            }
+
+            cb(result);
         });
     }
 };
