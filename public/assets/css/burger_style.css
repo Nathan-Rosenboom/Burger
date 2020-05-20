@@ -1,0 +1,49 @@
+body {
+    background-color: orange;
+}
+.title {
+    text-align: center;
+}
+
+.readyBurger {
+    text-align: center;
+    font-size: 25px;
+}
+
+.devouredBurger {
+    text-align: center;
+    font-size: 25px;
+}
+
+.createBurger {
+    text-align: center;
+}
+
+.readyList {
+    list-style: none;
+}
+.readyListItem {
+    margin-bottom: 10px;
+    background-color: palegoldenrod;
+    border-radius: 5px;
+    border: 3px;
+    border-color:peru;
+    border-style: solid;
+}
+
+.devouredList {
+    list-style: none;
+}
+
+.devouredListItem {
+    margin-bottom: 10px;
+    background-color: palegoldenrod;
+    border-radius: 5px;
+    border: 3px;
+    border-color: peru;
+    border-style: solid;
+}
+
+.devourBurger {
+    float: right;
+}
