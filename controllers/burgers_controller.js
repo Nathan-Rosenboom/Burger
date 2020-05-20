@@ -1,39 +1,38 @@
 const express = require("express");
+const router = express.Router();
 const burgerQuery = require("../models/burger.js");
-const app = express();
 
-let routes = {
-    getBurgers:
-        app.get("/", function (req, res) {
-            burgerQuery.all
-            if (err) {
-                return res.status(500).end();
-            }
-            if (result.length === 0) {
+router.get("/", function (req, res) {
+    burgerQuery.all(function(data) {
+        let hbsObject = {
+            burgers: data
+        };
+        console.log(hbsObject);
+        res.render("index", hbsObject);
+    });
+});
+
+router.post("/api/burgers", function (req, res) {
+    burgerQuery.create(["burger_name"], [req.body.burger_name], function (result) {
+        res.json({ id: result.insertId });
+    });
+});
+
+router.put("/api/burgers/:id", function (req, res) {
+    let condition = "id = " + req.params.id;
+    console.log("condition", condition);
+    burgerQuery.update(
+        {
+            devoured: 1
+        },
+        condition,
+        function (result) {
+            if (result.changedRows === 0) {
                 return res.status(404).end();
             }
-            res.render(result);
-            res.status(200);
-        }),
+            res.status(200).end();
+        }
+    );
+});
 
-    // Update burger status
-    devourBurger:
-        app.put("/api/burger/:id", function (req, res) {
-            burgerQuery.update
-            if (err) {
-                return res.status(500).end();
-            }
-            res.status(200);
-        }),
-
-    // Create a new burger
-    newBurger:
-        app.post("/api/burger", function (req, res) {
-            burgerQuery.insert;
-            if (err) {
-                return res.status(500).end();
-            }
-            res.status(200);
-        })
-}
-module.exports = routes;
+module.exports = router;
