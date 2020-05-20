@@ -7,6 +7,6 @@ USE burgers_db;
 CREATE TABLE burgers (
     id int NOT NULL AUTO_INCREMENT,
     burger_name varchar(50),
-    devoured tinyint,
+    devoured tinyint DEFAULT(0),
     PRIMARY KEY (id)
 );
